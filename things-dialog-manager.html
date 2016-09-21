@@ -1,0 +1,90 @@
+<dom-module id="things-dialog-manager">
+  <template>
+    <things-full-dialog id="common-dialog"></things-full-dialog>
+
+    <things-resource-detail-opener id='detail-dialog'></things-resource-detail-opener>
+
+    <things-resource-dialog id="resource-dialog"></things-resource-dialog>
+
+  </template>
+  
+  <script>
+    Polymer({
+      is: 'things-dialog-manager',
+
+      properties: {
+        isCommonDialogActive: {
+          type: Boolean,
+          value: false
+        },
+        
+        isDetailViewActive: {
+          type: Boolean,
+          value: false
+        },
+
+        isResourceDialogActive: {
+          type: Boolean,
+          value: false
+        },
+
+        dialogArray: {
+          type: Array,
+          value: function() {
+            return [{
+              id: 'common-dialog',
+              active: false
+            }, {
+              id: 'detail-dialog',
+              active: false
+            }, {
+              id: 'resource-dialog',
+              active: false
+            }]
+          }
+        }
+      },
+
+      openDialog: function(view, modal, openCallback) {
+        var dialogs = this.dialogArray.filter(function(dialog) {
+          return (dialog.active === false);
+        });
+
+        if(dialogs.length > 0) {
+          var selectedDialog = dialogs[0];
+          var dialogId = selectedDialog.id;
+          var element = this.$[dialogId];
+          var dialog = element.$.dialog;
+          
+          element.title = view.title;
+          dialog.modal = modal;
+          dialog.noCancelOnEscKey = false;
+          var scrollable = element.$.scrollroot;
+
+          if(element.detailView) {
+            try {
+              scrollable.removeChild(element.detailView);
+            } catch(e) {
+              console.log(e);
+            }
+          } 
+
+          if(element.openCallback) {
+            element.openCallback = null;
+          }
+          
+          element.detailView = view;
+          element.openCallback = openCallback;
+          scrollable.appendChild(element.detailView);
+
+          try {
+            dialog.open();
+            element.active = true;
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      }
+    })
+  </script>
+</dom-module>
