@@ -1,10 +1,15 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../things-resource-selector/things-resource-dialog.html">
+
 <dom-module id="things-dialog-manager">
   <template>
-    <things-full-dialog id="common-dialog"></things-full-dialog>
 
-    <things-resource-detail-opener id='detail-dialog'></things-resource-detail-opener>
-
-    <things-resource-dialog id="resource-dialog"></things-resource-dialog>
+    <things-resource-dialog id="dialog1"></things-resource-dialog>
+    <things-resource-dialog id="dialog2"></things-resource-dialog>
+    <things-resource-dialog id="dialog3"></things-resource-dialog>
+    <things-resource-dialog id="dialog4"></things-resource-dialog>
+    <things-resource-dialog id="dialog5"></things-resource-dialog>
 
   </template>
   
@@ -13,49 +18,37 @@
       is: 'things-dialog-manager',
 
       properties: {
-        isCommonDialogActive: {
-          type: Boolean,
-          value: false
-        },
-        
-        isDetailViewActive: {
-          type: Boolean,
-          value: false
-        },
 
-        isResourceDialogActive: {
-          type: Boolean,
-          value: false
-        },
-
-        dialogArray: {
-          type: Array,
-          value: function() {
-            return [{
-              id: 'common-dialog',
-              active: false
-            }, {
-              id: 'detail-dialog',
-              active: false
-            }, {
-              id: 'resource-dialog',
-              active: false
-            }]
-          }
+        openCallback: {
+          type: Function
         }
       },
 
-      openDialog: function(view, modal, openCallback) {
-        var dialogs = this.dialogArray.filter(function(dialog) {
-          return (dialog.active === false);
-        });
+      /**
+       * event 호출에 의한 dialog open 제어
+       */
+      attached: function() {
+        document.addEventListener('things-open-popup-view', function(event) {
+          var request = event.detail;
+          this.openDialog(request.view, request.modal, request.openCallback);
+        }.bind(this));
+      },
 
-        if(dialogs.length > 0) {
-          var selectedDialog = dialogs[0];
-          var dialogId = selectedDialog.id;
-          var element = this.$[dialogId];
-          var dialog = element.$.dialog;
-          
+      /**
+       * dialog open logic
+       */
+      openDialog: function(view, modal, openCallback) {
+        var elements = this._nodes;
+
+        var dialogs = elements.filter(function(element) {
+          return (element.id.indexOf('dialog') >= 0 && element.active == false);
+        })
+
+        var element = dialogs[0];
+
+        if(element) {
+          var dialog = element.$.dialog
+                    
           element.title = view.title;
           dialog.modal = modal;
           dialog.noCancelOnEscKey = false;
@@ -77,12 +70,9 @@
           element.openCallback = openCallback;
           scrollable.appendChild(element.detailView);
 
-          try {
-            dialog.open();
-            element.active = true;
-          } catch (e) {
-            console.log(e);
-          }
+          console.log(dialog);
+
+          dialog.open();
         }
       }
     })
