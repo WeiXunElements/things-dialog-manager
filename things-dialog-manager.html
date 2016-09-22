@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <link rel="import" href="../things-resource-selector/things-resource-dialog.html">
+<link rel="import" href="../things-detail/things-menu-detail-create-behavior.html">
 
 <dom-module id="things-dialog-manager">
   <template>
@@ -24,6 +25,10 @@
         }
       },
 
+      behaviors: [ 
+        Things.MenuDetailCreateBahavior
+      ],
+
       /**
        * event 호출에 의한 dialog open 제어
        */
@@ -32,6 +37,26 @@
           var request = event.detail;
           this.openDialog(request.view, request.modal, request.openCallback);
         }.bind(this));
+
+        document.addEventListener('things-open-menu-detail-view', function(event) {
+          this.initOpener(event);
+        }.bind(this));
+
+        document.addEventListener('things-detail-view-created', function(event) {
+          this.openDialog(event.detail, true, null);
+        }.bind(this));
+      },
+
+      /**
+       * Initialize Opener
+       *
+       * @param {Object} event
+       */
+      initOpener: function(event) {
+        this.menuInfo = null;      
+        this.menuInfo = event.detail.menuInfo; 
+        this.resource = event.detail.resource; 
+        this.resourceFormFields = event.detail.resourceFormFields;
       },
 
       /**
@@ -44,33 +69,37 @@
           return (element.id.indexOf('dialog') >= 0 && element.active == false);
         })
 
-        var element = dialogs[0];
+        if(dialogs.length > 0) {
+          var dialogSize = 'size' + dialogs.length;
+          var element = dialogs[0];
 
-        if(element) {
-          var dialog = element.$.dialog
-                    
-          element.title = view.title;
-          dialog.modal = modal;
-          dialog.noCancelOnEscKey = false;
-          var scrollable = element.$.scrollroot;
+          if(element) {
+            var dialog = element.$.dialog
+                      
+            element.title = view.title;
+            element.dialogSize = dialogSize;
+            dialog.modal = modal;
+            dialog.noCancelOnEscKey = false;
+            var scrollable = element.$.scrollroot;
 
-          if(element.detailView) {
-            try {
-              scrollable.removeChild(element.detailView);
-            } catch(e) {
-              console.log(e);
+            if(element.detailView) {
+              try {
+                scrollable.removeChild(element.detailView);
+              } catch(e) {
+                console.log(e);
+              }
+            } 
+
+            if(element.openCallback) {
+              element.openCallback = null;
             }
-          } 
+            
+            element.detailView = view;
+            element.openCallback = openCallback;
+            scrollable.appendChild(element.detailView);
 
-          if(element.openCallback) {
-            element.openCallback = null;
+            dialog.open();
           }
-          
-          element.detailView = view;
-          element.openCallback = openCallback;
-          scrollable.appendChild(element.detailView);
-
-          dialog.open();
         }
       }
     })
