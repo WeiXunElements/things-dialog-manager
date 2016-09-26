@@ -1,16 +1,24 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <link rel="import" href="../things-resource-selector/things-resource-dialog.html">
+<link rel="import" href="../things-date-picker/things-date-picker-dialog.html">
+<link rel="import" href="../things-image-selector/things-image-selector-dialog.html">
+<link rel="import" href="../things-section/things-import-dialog.html">
 <link rel="import" href="../things-detail/things-menu-detail-create-behavior.html">
 
 <dom-module id="things-dialog-manager">
   <template>
 
-    <things-resource-dialog id="dialog1"></things-resource-dialog>
-    <things-resource-dialog id="dialog2"></things-resource-dialog>
-    <things-resource-dialog id="dialog3"></things-resource-dialog>
-    <things-resource-dialog id="dialog4"></things-resource-dialog>
-    <things-resource-dialog id="dialog5"></things-resource-dialog>
+    <things-resource-dialog id="common-dialog1"></things-resource-dialog>
+    <things-resource-dialog id="common-dialog2"></things-resource-dialog>
+    <things-resource-dialog id="common-dialog3"></things-resource-dialog>
+    <things-resource-dialog id="common-dialog4"></things-resource-dialog>
+    <things-resource-dialog id="common-dialog5"></things-resource-dialog>
+
+    <things-date-picker-dialog id="date-picker-dialog"></things-date-picker-dialog>
+    <things-image-selector-dialog id="image-selector-dialog"></things-image-selector-dialog>
+
+    <things-import-dialog id="import-dialog"></things-import-dialog>
 
   </template>
   
@@ -66,7 +74,7 @@
         var elements = this._nodes;
 
         var dialogs = elements.filter(function(element) {
-          return (element.id.indexOf('dialog') >= 0 && element.active == false);
+          return (element.id.indexOf('common-dialog') >= 0 && element.active == false);
         })
 
         if(dialogs.length > 0) {
@@ -101,6 +109,27 @@
             dialog.open();
           }
         }
+      },
+
+      /**
+       * date pickier dialog open
+       */
+      openDateDialog: function(dataObj, callback) {
+        this.$['date-picker-dialog'].dialogToggle(dataObj, callback);
+      },
+
+      /**
+       * image selector dialog open
+       */
+      openImageSelectorDialog: function(dataObj, callback) {
+        this.$['image-selector-dialog'].dialogToggle(dataObj, callback);
+      },
+
+      /**
+       * import dialog open
+       */
+      openImportDialog: function(config, model, columns, menuInfo) {
+        this.$['import-dialog'].open(config, model, columns, menuInfo);
       }
     })
   </script>
