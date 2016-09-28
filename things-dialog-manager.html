@@ -53,6 +53,19 @@
         document.addEventListener('things-detail-view-created', function(event) {
           this.openDialog(event.detail, true, null);
         }.bind(this));
+
+        document.addEventListener('things-date-picker-toggle', function(event) {
+          this.openDateDialog(event.detail.dataObj, event.detail.callback);
+        }.bind(this));
+
+        document.addEventListener('things-image-selector-toggle', function(event) {
+          this.openImageSelectorDialog(event.detail.dataObj, event.detail.callback);
+        }.bind(this));
+
+        document.addEventListener('things-import-dialog-toggle', function(event) {
+          var request = event.detail;
+          this.openImportDialog(request.config, request.model, request.columns, request.menuInfo);
+        }.bind(this));
       },
 
       /**
