@@ -48,7 +48,7 @@
       attached: function() {
         document.addEventListener('things-open-popup-view', function(event) {
           var request = event.detail;
-          this.openDialog(request.view, request.modal, request.openCallback);
+          this.openDialog(request.view, request.modal, request.openCallback, request.closeCallback);
         }.bind(this));
 
         document.addEventListener('things-open-menu-detail-view', function(event) {
@@ -56,7 +56,7 @@
         }.bind(this));
 
         document.addEventListener('things-detail-view-created', function(event) {
-          this.openDialog(event.detail, true, null);
+          this.openDialog(event.detail, true, null, null);
         }.bind(this));
 
         document.addEventListener('things-date-picker-toggle', function(event) {
@@ -72,7 +72,7 @@
           this.openImportDialog(request.config, request.model, request.columns, request.menuInfo);
         }.bind(this));
 
-        document.addEventListener('things-common-dialog-close', function() {
+        document.addEventListener('things-dialog-close', function() {
           this.closeDialog();
         }.bind(this));
 
@@ -108,7 +108,7 @@
       /**
        * dialog open logic
        */
-      openDialog: function(view, modal, openCallback) {
+      openDialog: function(view, modal, openCallback, closeCallback) {
         var elements = this._nodes;
 
         var dialogs = elements.filter(function(element) {
@@ -139,9 +139,14 @@
             if(element.openCallback) {
               element.openCallback = null;
             }
+
+            if(element.closeCallback) {
+              element.closeCallback = null;
+            }
             
             element.detailView = view;
             element.openCallback = openCallback;
+            element.closeCallback = closeCallback;
             scrollable.appendChild(element.detailView);
 
             dialog.open();
@@ -155,19 +160,23 @@
       closeDialog: function() {
         var elements = this._nodes;
         var dialogs = elements.filter(function(element) {
-          return (element.id.indexOf('common-dialog') >= 0 &&element.active == true);
+          return (element.id.indexOf('common-dialog') >= 0 && element.active == true);
         });
 
         var lastDialog = dialogs.pop(-1);
-        lastDialog.close();
+        lastDialog.$.dialog.close();
       },
 
+      /**
+       * 모든 다이얼로그를 close
+       */
       closeAllDialog: function() {
         var elements = this._nodes;
 
         elements.forEach(function(element) {
           if(element.active) {
-            element.close();
+            var dialog = element.$.dialog;
+            dialog.close();
           }
         });
       },
