@@ -31,6 +31,7 @@
         openCallback: {
           type: Function
         },
+
         locale: {
           type: String,
           value :'en'
@@ -69,6 +70,26 @@
         document.addEventListener('things-import-dialog-toggle', function(event) {
           var request = event.detail;
           this.openImportDialog(request.config, request.model, request.columns, request.menuInfo);
+        }.bind(this));
+
+        document.addEventListener('things-common-dialog-close', function() {
+          this.closeDialog();
+        }.bind(this));
+
+        document.addEventListener('things-all-dialog-close', function() {
+          this.closeAllDialog();
+        }.bind(this));
+
+        document.addEventListener('things-date-picker-close', function() {
+          this.closeDateDialog();
+        }.bind(this));
+
+        document.addEventListener('things-image-selector-close', function() {
+          this.closeImageSelectorDialog();
+        }.bind(this));
+
+        document.addEventListener('things-import-dialog-close', function() {
+          this.closeImportDialog();
         }.bind(this));
       },
 
@@ -129,17 +150,54 @@
       },
 
       /**
+       * active common-dialog중 가장 최근에 사용한 dialog를 닫는다.
+       */
+      closeDialog: function() {
+        var elements = this._nodes;
+        var dialogs = elements.filter(function(element) {
+          return (element.id.indexOf('common-dialog') >= 0 &&element.active == true);
+        });
+
+        var lastDialog = dialogs.pop(-1);
+        lastDialog.close();
+      },
+
+      closeAllDialog: function() {
+        var elements = this._nodes;
+
+        elements.forEach(function(element) {
+          if(element.active) {
+            element.close();
+          }
+        });
+      },
+
+      /**
        * date pickier dialog open
        */
       openDateDialog: function(dataObj, callback) {
-        this.$['date-picker-dialog'].dialogToggle(dataObj, callback);
+        this.$['date-picker-dialog'].open(dataObj, callback);
+      },
+
+      /**
+       * date picker dialog close
+       */
+      closeDateDialog: function() {
+        this.$['date-picker-dialog'].close();
       },
 
       /**
        * image selector dialog open
        */
       openImageSelectorDialog: function(dataObj, callback) {
-        this.$['image-selector-dialog'].dialogToggle(dataObj, callback);
+        this.$['image-selector-dialog'].open(dataObj, callback);
+      },
+
+      /**
+       * image selector dialog close
+       */
+      closeImageSelectorDialog: function() {
+        this.$['image-selector-dialog'].close();
       },
 
       /**
@@ -147,6 +205,13 @@
        */
       openImportDialog: function(config, model, columns, menuInfo) {
         this.$['import-dialog'].open(config, model, columns, menuInfo);
+      },
+
+      /**
+       * import dialog close
+       */
+      closeImportDialog: function() {
+        this.$['import-dialog'].close();
       }
     })
   </script>
