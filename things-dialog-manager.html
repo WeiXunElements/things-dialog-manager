@@ -77,11 +77,12 @@
           var request = event.detail;
           var title = request.title;
           var attachmentId = request.attachmentId;
+          var imageUrl = request.imageUrl;
           var dialogSize = request.dialogSize;
           var openCallback = request.openCallback;
           var closeCallback = request.closeCallback;
 
-          this.openImageDialog(title, attachmentId, dialogSize, openCallback, closeCallback)
+          this.openImageDialog(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback)
         }.bind(this));
 
         document.addEventListener('things-dialog-close', function() {
@@ -242,8 +243,8 @@
       /**
        * image dialog open
        */
-      openImageDialog: function(title, attachmentId, dialogSize, openCallback, closeCallback) {
-        this.$['image-dialog'].open(title, attachmentId, dialogSize, openCallback, closeCallback);
+      openImageDialog: function(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback) {
+        this.$['image-dialog'].open(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback);
       },
 
       /**
