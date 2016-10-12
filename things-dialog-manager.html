@@ -52,6 +52,11 @@
           this.openDialog(request.view, request.modal, request.openCallback, request.closeCallback);
         }.bind(this));
 
+        document.addEventListener('things-open-custom-size-dialog', function(event) {
+          var request = event.detail;
+          this.openCustomSizeDialog(request.view, request.modal, request.dialogSize, request.openCallback, request.closeCallback);
+        }.bind(this));
+
         document.addEventListener('things-open-menu-detail-view', function(event) {
           this.initOpener(event);
         }.bind(this));
@@ -137,7 +142,7 @@
           var element = dialogs[0];
 
           if(element) {
-            var dialog = element.$.dialog
+            var dialog = element.getDialg();
                       
             element.title = view.title;
             element.dialogSize = dialogSize;
@@ -177,11 +182,13 @@
       closeDialog: function() {
         var elements = this._nodes;
         var dialogs = elements.filter(function(element) {
+          console.log(element.active);
+          console.log(element.id.indexOf('common-dialog'));
           return (element.id.indexOf('common-dialog') >= 0 && element.active == true);
         });
 
         var lastDialog = dialogs.pop(-1);
-        lastDialog.$.dialog.close();
+        lastDialog.getDialog().close();
       },
 
       /**
@@ -192,10 +199,56 @@
 
         elements.forEach(function(element) {
           if(element.active) {
-            var dialog = element.$.dialog;
+            var dialog = element.getDialog();
             dialog.close();
           }
         });
+      },
+
+      /**
+       * dialog open logic
+       */
+      openCustomSizeDialog: function(view, modal, dialogSize, openCallback, closeCallback) {
+        var elements = this._nodes;
+
+        var dialogs = elements.filter(function(element) {
+          return (element.id.indexOf('common-dialog') >= 0 && element.active == false);
+        })
+
+        var element = dialogs[0];
+
+        if(element) {
+          var dialog = element.getDialog();
+                    
+          element.title = view.title;
+          element.dialogSize = dialogSize;
+          dialog.modal = modal;
+          dialog.noCancelOnEscKey = false;
+          var scrollable = element.$.scrollroot;
+
+          if(element.detailView) {
+            try {
+              scrollable.removeChild(element.detailView);
+            } catch(e) {
+              console.log(e);
+            }
+          } 
+
+          if(element.openCallback) {
+            element.openCallback = null;
+          }
+
+          if(element.closeCallback) {
+            element.closeCallback = null;
+          }
+          
+          element.detailView = view;
+          element.openCallback = openCallback;
+          element.closeCallback = closeCallback;
+          scrollable.appendChild(element.detailView);
+
+          dialog.open();
+        }
       },
 
       /**
