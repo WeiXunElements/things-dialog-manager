@@ -5,6 +5,7 @@
 <link rel="import" href="../things-image-selector/things-image-selector-dialog.html">
 <link rel="import" href="../things-section/things-import-dialog.html">
 <link rel="import" href="../things-detail/things-menu-detail-create-behavior.html">
+<link rel="import" href="../things-image-dialog/things-image-dialog.html">
 
 <dom-module id="things-dialog-manager">
   <template>
@@ -17,8 +18,8 @@
 
     <things-date-picker-dialog id="date-picker-dialog" locale="[[locale]]"></things-date-picker-dialog>
     <things-image-selector-dialog id="image-selector-dialog"></things-image-selector-dialog>
-
     <things-import-dialog id="import-dialog"></things-import-dialog>
+    <things-image-dialog id="image-dialog"></things-image-dialog>
 
   </template>
   
@@ -72,6 +73,17 @@
           this.openImportDialog(request.config, request.model, request.columns, request.menuInfo);
         }.bind(this));
 
+        document.addEventListener('things-image-dialog-toggle', function(event) {
+          var request = event.detail;
+          var title = request.title;
+          var attachmentId = request.attachmentId;
+          var dialogSize = request.dialogSize;
+          var openCallback = request.openCallback;
+          var closeCallback = request.closeCallback;
+
+          this.openImageDialog(title, attachmentId, dialogSize, openCallback, closeCallback)
+        }.bind(this));
+
         document.addEventListener('things-dialog-close', function() {
           this.closeDialog();
         }.bind(this));
@@ -90,6 +102,10 @@
 
         document.addEventListener('things-import-dialog-close', function() {
           this.closeImportDialog();
+        }.bind(this));
+
+        document.addEventListener('things-image-dialog-close', function() {
+          this.closeImageDialog();
         }.bind(this));
       },
 
@@ -221,6 +237,20 @@
        */
       closeImportDialog: function() {
         this.$['import-dialog'].close();
+      },
+
+      /**
+       * image dialog open
+       */
+      openImageDialog: function(title, attachmentId, dialogSize, openCallback, closeCallback) {
+        this.$['image-dialog'].open(title, attachmentId, dialogSize, openCallback, closeCallback);
+      },
+
+      /**
+       * image dialog close
+       */
+      closeImageDialog: function() {
+        this.$['image-dialog'].close();
       }
     })
   </script>
