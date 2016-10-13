@@ -182,8 +182,6 @@
       closeDialog: function() {
         var elements = this._nodes;
         var dialogs = elements.filter(function(element) {
-          console.log(element.active);
-          console.log(element.id.indexOf('common-dialog'));
           return (element.id.indexOf('common-dialog') >= 0 && element.active == true);
         });
 
