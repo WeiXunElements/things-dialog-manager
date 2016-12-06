@@ -7,9 +7,11 @@
 <link rel="import" href="../things-detail/things-menu-detail-create-behavior.html">
 <link rel="import" href="../things-image-dialog/things-image-dialog.html">
 
+<!--
+  다이얼로그 관리자
+-->
 <dom-module id="things-dialog-manager">
   <template>
-
     <things-resource-dialog id="common-dialog1"></things-resource-dialog>
     <things-resource-dialog id="common-dialog2"></things-resource-dialog>
     <things-resource-dialog id="common-dialog3"></things-resource-dialog>
@@ -20,7 +22,6 @@
     <things-image-selector-dialog id="image-selector-dialog" use-upload></things-image-selector-dialog>
     <things-import-dialog id="import-dialog"></things-import-dialog>
     <things-image-dialog id="image-dialog"></things-image-dialog>
-
   </template>
   
   <script>
@@ -75,7 +76,7 @@
 
         document.addEventListener('things-import-dialog-toggle', function(event) {
           var request = event.detail;
-          this.openImportDialog(request.config, request.model, request.columns, request.menuInfo);
+          this.openImportDialog(request.config, request.model, request.columns, request.menuInfo, request.closeCallback);
         }.bind(this));
 
         document.addEventListener('things-image-dialog-toggle', function(event) {
@@ -280,8 +281,8 @@
       /**
        * import dialog open
        */
-      openImportDialog: function(config, model, columns, menuInfo) {
-        this.$['import-dialog'].open(config, model, columns, menuInfo);
+      openImportDialog: function(config, model, columns, menuInfo, closeCallback) {
+        this.$['import-dialog'].open(config, model, columns, menuInfo, closeCallback);
       },
 
       /**
