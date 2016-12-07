@@ -63,7 +63,8 @@
         }.bind(this));
 
         document.addEventListener('things-detail-view-created', function(event) {
-          this.openDialog(event.detail, true, null, null);
+          var request = event.detail;
+          this.openDialog(request.view, request.modal, request.openCallback, request.closeCallback);
         }.bind(this));
 
         document.addEventListener('things-date-picker-toggle', function(event) {
@@ -124,7 +125,9 @@
       initOpener: function(event) {
         this.menuInfo = null;      
         this.menuInfo = event.detail.menuInfo; 
-        this.resource = event.detail.resource; 
+        this.resource = event.detail.resource;
+        this.openCallback = event.detail.openCallback;
+        this.closeCallback = event.detail.closeCallback;
         this.resourceFormFields = event.detail.resourceFormFields;
       },
 
