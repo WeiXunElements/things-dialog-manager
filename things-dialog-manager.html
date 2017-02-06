@@ -20,6 +20,7 @@
 
     <things-date-picker-dialog id="date-picker-dialog" locale="[[locale]]"></things-date-picker-dialog>
     <things-image-selector-dialog id="image-selector-dialog" use-upload></things-image-selector-dialog>
+    <things-file-selector-dialog id="file-selector-dialog" use-upload></things-file-selector-dialog>
     <things-import-dialog id="import-dialog"></things-import-dialog>
     <things-image-dialog id="image-dialog"></things-image-dialog>
   </template>
@@ -75,6 +76,10 @@
           this.openImageSelectorDialog(event.detail.dataObj, event.detail.callback);
         }.bind(this));
 
+        document.addEventListener('things-file-selector-toggle', function(event) {
+          this.openFileSelectorDialog(event.detail.dataObj, event.detail.callback);
+        }.bind(this));
+
         document.addEventListener('things-import-dialog-toggle', function(event) {
           var request = event.detail;
           this.openImportDialog(request.config, request.model, request.columns, request.menuInfo, request.closeCallback);
@@ -106,6 +111,10 @@
 
         document.addEventListener('things-image-selector-close', function() {
           this.closeImageSelectorDialog();
+        }.bind(this));
+
+        document.addEventListener('things-file-selector-close', function() {
+          this.closeFileSelectorDialog();
         }.bind(this));
 
         document.addEventListener('things-import-dialog-close', function() {
@@ -272,6 +281,10 @@
        */
       openImageSelectorDialog: function(dataObj, callback) {
         this.$['image-selector-dialog'].open(dataObj, callback);
+      },
+
+      openFileSelectorDialog: function(dataObj, callback) {
+        this.$['file-selector-dialog'].open(dataObj, callback);
       },
 
       /**
