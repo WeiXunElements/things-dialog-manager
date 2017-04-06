@@ -12,17 +12,25 @@
 -->
 <dom-module id="things-dialog-manager">
   <template>
-    <things-resource-dialog id="common-dialog1"></things-resource-dialog>
-    <things-resource-dialog id="common-dialog2"></things-resource-dialog>
-    <things-resource-dialog id="common-dialog3"></things-resource-dialog>
-    <things-resource-dialog id="common-dialog4"></things-resource-dialog>
-    <things-resource-dialog id="common-dialog5"></things-resource-dialog>
+    <things-resource-dialog id="common-dialog1" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    </things-resource-dialog>
+    <things-resource-dialog id="common-dialog2" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    </things-resource-dialog>
+    <things-resource-dialog id="common-dialog3" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    </things-resource-dialog>
+    <things-resource-dialog id="common-dialog4" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    </things-resource-dialog>
+    <things-resource-dialog id="common-dialog5" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    </things-resource-dialog>
 
-    <things-date-picker-dialog id="date-picker-dialog" locale="[[locale]]"></things-date-picker-dialog>
-    <things-image-selector-dialog id="image-selector-dialog" use-upload></things-image-selector-dialog>
-    <things-file-selector-dialog id="file-selector-dialog" use-upload></things-file-selector-dialog>
-    <things-import-dialog id="import-dialog"></things-import-dialog>
-    <things-image-dialog id="image-dialog"></things-image-dialog>
+    <things-date-picker-dialog id="date-picker-dialog" locale="[[locale]]" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    </things-date-picker-dialog>
+    <things-image-selector-dialog id="image-selector-dialog" no-cancel-on-esc-key=[[noCancelOnEscKey]] use-upload>
+    </things-image-selector-dialog>
+    <things-file-selector-dialog id="file-selector-dialog" no-cancel-on-esc-key=[[noCancelOnEscKey]] use-upload>
+    </things-file-selector-dialog>
+    <things-import-dialog id="import-dialog" no-cancel-on-esc-key=[[noCancelOnEscKey]]></things-import-dialog>
+    <things-image-dialog id="image-dialog" no-cancel-on-esc-key=[[noCancelOnEscKey]]></things-image-dialog>
   </template>
   
   <script>
@@ -30,14 +38,34 @@
       is: 'things-dialog-manager',
 
       properties: {
-
+        /**
+         * the callback running on dialog open
+         * 다이어로그가 오픈될때 실행되는 callback
+         *****
+         * @type {Function}
+         */
         openCallback: {
           type: Function
         },
-
+        /**
+         * locale 설정
+         * locale제공용 프로퍼티
+         *****
+         * @type {String}
+         */
         locale: {
           type: String,
           value :'en'
+        },
+        /**
+         * Set to true to disable canceling the overlay with the ESC key.
+         * True로 설정시 cancel dialog에서 ESC key로 꺼지지 않음
+         *****
+         * @type {Boolean}
+         */
+        noCancelOnEscKey:{
+          type: Boolean,
+          value: false
         }
       },
 
@@ -47,6 +75,7 @@
 
       /**
        * event 호출에 의한 dialog open 제어
+       * ****
        */
       attached: function() {
         document.addEventListener('things-open-popup-view', function(event) {
@@ -128,7 +157,7 @@
 
       /**
        * Initialize Opener
-       *
+       ****
        * @param {Object} event
        */
       initOpener: function(event) {
@@ -141,7 +170,14 @@
       },
 
       /**
+       * 
        * dialog open logic
+       ****
+       * @param  {Object} view          화면에 보여줄 element
+       * @param  {Object} modal         modal option
+       * @param  {[type]} openCallback  open시 수행 callback
+       * @param  {[type]} closeCallback close시 수행 callback
+       * @return {null}
        */
       openDialog: function(view, modal, openCallback, closeCallback) {
         var elements = this._nodes;
@@ -160,7 +196,6 @@
             element.title = view.title;
             element.dialogSize = dialogSize;
             dialog.modal = modal;
-            dialog.noCancelOnEscKey = false;
             var scrollable = element.$.scrollroot;
 
             if(element.detailView) {
@@ -217,7 +252,14 @@
       },
 
       /**
-       * dialog open logic
+       * 
+       * custom dialog open logic
+       ****
+       * @param  {Object} view          화면에 보여줄 element
+       * @param  {Object} modal         modal option
+       * @param  {[type]} openCallback  open시 수행 callback
+       * @param  {[type]} closeCallback close시 수행 callback
+       * @return {null}
        */
       openCustomSizeDialog: function(view, modal, dialogSize, openCallback, closeCallback) {
         var elements = this._nodes;
@@ -234,7 +276,6 @@
           element.title = view.title;
           element.dialogSize = dialogSize;
           dialog.modal = modal;
-          dialog.noCancelOnEscKey = false;
           var scrollable = element.$.scrollroot;
 
           if(element.detailView) {
@@ -264,6 +305,11 @@
 
       /**
        * date pickier dialog open
+       *
+       * ****
+       * @param  {object}   dataObj  다이어로그 사용 object
+       * @param  {Function} callback open시 적용 callback
+       * @return {null}            
        */
       openDateDialog: function(dataObj, callback) {
         this.$['date-picker-dialog'].open(dataObj, callback);
@@ -278,11 +324,23 @@
 
       /**
        * image selector dialog open
+       *
+       * ****
+       * @param  {object}   dataObj  다이어로그 사용 object
+       * @param  {Function} callback open시 적용 callback
+       * @return {null}            
        */
       openImageSelectorDialog: function(dataObj, callback) {
         this.$['image-selector-dialog'].open(dataObj, callback);
       },
-
+      /**
+       * File selector dialog open
+       *
+       * ****
+       * @param  {object}   dataObj  다이어로그 사용 object
+       * @param  {Function} callback open시 적용 callback
+       * @return {null}            
+       */
       openFileSelectorDialog: function(dataObj, callback) {
         this.$['file-selector-dialog'].open(dataObj, callback);
       },
@@ -296,6 +354,13 @@
 
       /**
        * import dialog open
+       * ****
+       * @param  {Object} config        grid config
+       * @param  {Object} model         grid model
+       * @param  {Array} columns       grid columns
+       * @param  {Object} menuInfo      menu information
+       * @param  {function} closeCallback callback
+       * @return {null}              
        */
       openImportDialog: function(config, model, columns, menuInfo, closeCallback) {
         this.$['import-dialog'].open(config, model, columns, menuInfo, closeCallback);
@@ -310,6 +375,14 @@
 
       /**
        * image dialog open
+       * ****
+       * @param  {String} title         dialog title
+       * @param  {Number} attachmentId  image id
+       * @param  {Numer} imageUrl      image url
+       * @param  {Number} dialogSize    dialog size
+       * @param  {Function} openCallback  open시 호출 callback
+       * @param  {Function} closeCallback close시 호출 callback
+       * @return {null}               
        */
       openImageDialog: function(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback) {
         this.$['image-dialog'].open(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback);
