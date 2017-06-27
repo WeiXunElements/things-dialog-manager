@@ -1,7 +1,30 @@
 # things-dialog-manager
+## 모든 Things Client내 프램웍 부분의 Dialog를 Open 및 Close해 주는  컴포넌트
 
-An element providing a starting point for your own reusable Polymer elements.
-
+Example)
+```html
+<things-dialog-manager locale=[[globals.locale]]>
+</things-dialog-manager>
+```
+### 아래와 같은 Event들을 받고 Dialog를 오픈한다.
+```
+things-open-popup-view,
+things-open-custom-size-dialog,
+things-open-menu-detail-view,
+things-detail-view-created,
+things-date-picker-toggle,
+things-image-selector-toggle,
+things-file-selector-toggle,
+things-import-dialog-toggle,
+things-image-dialog-toggle,
+things-dialog-close,
+things-all-dialog-close,
+things-date-picker-close,
+things-image-selector-close,
+things-file-selector-close,
+things-import-dialog-close,
+things-image-dialog-close
+```
 
 ## Dependencies
 
