@@ -1,12 +1,12 @@
 # things-dialog-manager
-## 모든 Things Client내 프램웍 부분의 Dialog를 Open 및 Close해 주는  컴포넌트
+## This is a component that opens and closes the dialogs of all parts within Things Client.
 
 Example)
 ```html
 <things-dialog-manager locale=[[globals.locale]]>
 </things-dialog-manager>
 ```
-### 아래와 같은 Event들을 받고 Dialog를 오픈한다.
+### It receives the following events and opens the Dialog.
 ```
 things-open-popup-view,
 things-open-custom-size-dialog,
@@ -28,8 +28,7 @@ things-image-dialog-close
 
 ## Dependencies
 
-Element dependencies are managed via [Bower](http://bower.io/). You can
-install that via:
+Element dependencies are managed via [Bower](http://bower.io/). You can install that via:
 
     npm install -g bower
 
@@ -51,3 +50,4 @@ And you can run it via:
     polyserve
 
 Once running, you can preview your element at
+`http://localhost:8080/components/things-dialog-manager/`, where `things-dialog-manager` is the name of the directory containing it.
