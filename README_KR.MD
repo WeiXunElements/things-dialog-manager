@@ -1,0 +1,53 @@
+# things-dialog-manager
+## 모든 Things Client내 프램웍 부분의 Dialog를 Open 및 Close해 주는  컴포넌트
+
+Example)
+```html
+<things-dialog-manager locale=[[globals.locale]]>
+</things-dialog-manager>
+```
+### 아래와 같은 Event들을 받고 Dialog를 오픈한다.
+```
+things-open-popup-view,
+things-open-custom-size-dialog,
+things-open-menu-detail-view,
+things-detail-view-created,
+things-date-picker-toggle,
+things-image-selector-toggle,
+things-file-selector-toggle,
+things-import-dialog-toggle,
+things-image-dialog-toggle,
+things-dialog-close,
+things-all-dialog-close,
+things-date-picker-close,
+things-image-selector-close,
+things-file-selector-close,
+things-import-dialog-close,
+things-image-dialog-close
+```
+
+## Dependencies
+
+Element dependencies are managed via [Bower](http://bower.io/). You can
+install that via:
+
+    npm install -g bower
+
+Then, go ahead and download the element's dependencies:
+
+    bower install
+
+
+## Playing With Your Element
+
+If you wish to work on your element in isolation, we recommend that you use
+[Polyserve](https://github.com/PolymerLabs/polyserve) to keep your element's
+bower dependencies in line. You can install it via:
+
+    npm install -g polyserve
+
+And you can run it via:
+
+    polyserve
+
+Once running, you can preview your element at
