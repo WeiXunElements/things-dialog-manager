@@ -16,25 +16,25 @@ Copyright © HatioLab Inc. All rights reserved.
 -->
 <dom-module id="things-dialog-manager">
   <template>
-    <things-resource-dialog id="common-dialog1" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog1" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
     </things-resource-dialog>
-    <things-resource-dialog id="common-dialog2" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog2" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
     </things-resource-dialog>
-    <things-resource-dialog id="common-dialog3" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog3" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
     </things-resource-dialog>
-    <things-resource-dialog id="common-dialog4" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog4" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
     </things-resource-dialog>
-    <things-resource-dialog id="common-dialog5" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog5" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
     </things-resource-dialog>
 
     <things-date-picker-dialog id="date-picker-dialog" locale="[[locale]]" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
     </things-date-picker-dialog>
-    <things-image-selector-dialog id="image-selector-dialog" no-cancel-on-esc-key=[[noCancelOnEscKey]] use-upload>
+    <things-image-selector-dialog id="image-selector-dialog" resizeable=[[resizeable]] moveable=[[moveable]] no-cancel-on-esc-key=[[noCancelOnEscKey]] use-upload>
     </things-image-selector-dialog>
-    <things-file-selector-dialog id="file-selector-dialog" no-cancel-on-esc-key=[[noCancelOnEscKey]] use-upload>
+    <things-file-selector-dialog id="file-selector-dialog" resizeable=[[resizeable]] moveable=[[moveable]] no-cancel-on-esc-key=[[noCancelOnEscKey]] use-upload>
     </things-file-selector-dialog>
-    <things-import-dialog id="import-dialog" no-cancel-on-esc-key=[[noCancelOnEscKey]]></things-import-dialog>
-    <things-image-dialog id="image-dialog" no-cancel-on-esc-key=[[noCancelOnEscKey]]></things-image-dialog>
+    <things-import-dialog id="import-dialog" resizeable=[[resizeable]] moveable=[[moveable]] no-cancel-on-esc-key=[[noCancelOnEscKey]]></things-import-dialog>
+    <things-image-dialog id="image-dialog" resizeable=[[resizeable]] moveable=[[moveable]] no-cancel-on-esc-key=[[noCancelOnEscKey]]></things-image-dialog>
   </template>
   
   <script>
@@ -68,6 +68,26 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {Boolean}
          */
         noCancelOnEscKey:{
+          type: Boolean,
+          value: false
+        },
+        /**
+         * Set true to enable resize
+         * true로 설정시 dialog에 화면 사이즈 변경설정이 적용됨
+         *****
+         * @type {Boolean}
+         */
+        resizeable: {
+          type: Boolean,
+          value: false
+        },
+        /**
+         * Set to true to enable move
+         * true로 설정시 dialog에 화면 화면내에서 이동설정이 적용됨
+         *****
+         * @type {Boolean}
+         */
+        moveable: {
           type: Boolean,
           value: false
         }
