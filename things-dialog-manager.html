@@ -1,42 +1,89 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html" />
 
-<link rel="import" href="../things-resource-selector/things-resource-dialog.html">
-<link rel="import" href="../things-date-picker/things-date-picker-dialog.html">
-<link rel="import" href="../things-image-selector/things-image-selector-dialog.html">
-<link rel="import" href="../things-section/things-import-dialog.html">
-<link rel="import" href="../things-detail/things-menu-detail-create-behavior.html">
-<link rel="import" href="../things-image-dialog/things-image-dialog.html">
+<link rel="import" href="../things-resource-selector/things-resource-dialog.html" />
+<link rel="import" href="../things-date-picker/things-date-picker-dialog.html" />
+<link rel="import" href="../things-image-selector/things-image-selector-dialog.html" />
+<link rel="import" href="../things-section/things-import-dialog.html" />
+<link rel="import" href="../things-detail/things-menu-detail-create-behavior.html" />
+<link rel="import" href="../things-image-dialog/things-image-dialog.html" />
 
 <!--
   다이얼로그 관리자
 -->
 <dom-module id="things-dialog-manager">
   <template>
-    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog1" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      id="common-dialog1"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+    >
     </things-resource-dialog>
-    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog2" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      id="common-dialog2"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+    >
     </things-resource-dialog>
-    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog3" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      id="common-dialog3"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+    >
     </things-resource-dialog>
-    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog4" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      id="common-dialog4"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+    >
     </things-resource-dialog>
-    <things-resource-dialog resizeable=[[resizeable]] moveable=[[moveable]] id="common-dialog5" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-resource-dialog
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      id="common-dialog5"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+    >
     </things-resource-dialog>
 
-    <things-date-picker-dialog id="date-picker-dialog" locale="[[locale]]" no-cancel-on-esc-key=[[noCancelOnEscKey]]>
+    <things-date-picker-dialog id="date-picker-dialog" locale="[[locale]]" no-cancel-on-esc-key="[[noCancelOnEscKey]]">
     </things-date-picker-dialog>
-    <things-image-selector-dialog id="image-selector-dialog" resizeable=[[resizeable]] moveable=[[moveable]] no-cancel-on-esc-key=[[noCancelOnEscKey]] use-upload>
+    <things-image-selector-dialog
+      id="image-selector-dialog"
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+      use-upload
+    >
     </things-image-selector-dialog>
-    <things-file-selector-dialog id="file-selector-dialog" resizeable=[[resizeable]] moveable=[[moveable]] no-cancel-on-esc-key=[[noCancelOnEscKey]] use-upload>
+    <things-file-selector-dialog
+      id="file-selector-dialog"
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+      use-upload
+    >
     </things-file-selector-dialog>
-    <things-import-dialog id="import-dialog" resizeable=[[resizeable]] moveable=[[moveable]] no-cancel-on-esc-key=[[noCancelOnEscKey]]></things-import-dialog>
-    <things-image-dialog id="image-dialog" resizeable=[[resizeable]] moveable=[[moveable]] no-cancel-on-esc-key=[[noCancelOnEscKey]]></things-image-dialog>
+    <things-import-dialog
+      id="import-dialog"
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+    ></things-import-dialog>
+    <things-image-dialog
+      id="image-dialog"
+      resizeable="[[resizeable]]"
+      moveable="[[moveable]]"
+      no-cancel-on-esc-key="[[noCancelOnEscKey]]"
+    ></things-image-dialog>
   </template>
-  
+
   <script>
     Polymer({
       is: 'things-dialog-manager',
@@ -49,7 +96,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {Function}
          */
         openCallback: {
-          type: Function
+          type: Function,
         },
         /**
          * locale 설정
@@ -59,7 +106,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         locale: {
           type: String,
-          value :'en'
+          value: 'en',
         },
         /**
          * Set to true to disable canceling the overlay with the ESC key.
@@ -67,9 +114,9 @@ Copyright © HatioLab Inc. All rights reserved.
          *****
          * @type {Boolean}
          */
-        noCancelOnEscKey:{
+        noCancelOnEscKey: {
           type: Boolean,
-          value: false
+          value: false,
         },
         /**
          * Set true to enable resize
@@ -79,7 +126,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         resizeable: {
           type: Boolean,
-          value: false
+          value: false,
         },
         /**
          * Set to true to enable move
@@ -89,94 +136,152 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         moveable: {
           type: Boolean,
-          value: false
-        }
+          value: false,
+        },
       },
 
-      behaviors: [ 
-        Things.MenuDetailCreateBahavior
-      ],
+      behaviors: [Things.MenuDetailCreateBahavior],
 
       /**
        * event 호출에 의한 dialog open 제어
        * ****
        */
-      attached: function() {
-        document.addEventListener('things-open-popup-view', function(event) {
-          var request = event.detail;
-          this.openDialog(request.view, request.modal, request.openCallback, request.closeCallback);
-        }.bind(this));
+      attached: function () {
+        document.addEventListener(
+          'things-open-popup-view',
+          function (event) {
+            var request = event.detail;
+            this.openDialog(request.view, request.modal, request.openCallback, request.closeCallback);
+          }.bind(this)
+        );
 
-        document.addEventListener('things-open-custom-size-dialog', function(event) {
-          var request = event.detail;
-          this.openCustomSizeDialog(request.view, request.modal, request.dialogSize, request.openCallback, request.closeCallback);
-        }.bind(this));
+        document.addEventListener(
+          'things-open-custom-size-dialog',
+          function (event) {
+            var request = event.detail;
+            this.openCustomSizeDialog(
+              request.view,
+              request.modal,
+              request.dialogSize,
+              request.openCallback,
+              request.closeCallback
+            );
+          }.bind(this)
+        );
 
-        document.addEventListener('things-open-menu-detail-view', function(event) {
-          this.initOpener(event);
-        }.bind(this));
+        document.addEventListener(
+          'things-open-menu-detail-view',
+          function (event) {
+            this.initOpener(event);
+          }.bind(this)
+        );
 
-        document.addEventListener('things-detail-view-created', function(event) {
-          var request = event.detail;
-          this.openDialog(request.view, request.modal, request.openCallback, request.closeCallback);
-        }.bind(this));
+        document.addEventListener(
+          'things-detail-view-created',
+          function (event) {
+            var request = event.detail;
+            this.openDialog(request.view, request.modal, request.openCallback, request.closeCallback);
+          }.bind(this)
+        );
 
-        document.addEventListener('things-date-picker-toggle', function(event) {
-          this.openDateDialog(event.detail.dataObj, event.detail.callback);
-        }.bind(this));
+        document.addEventListener(
+          'things-date-picker-toggle',
+          function (event) {
+            this.openDateDialog(event.detail.dataObj, event.detail.callback);
+          }.bind(this)
+        );
 
-        document.addEventListener('things-image-selector-toggle', function(event) {
-          this.openImageSelectorDialog(event.detail.dataObj, event.detail.callback);
-        }.bind(this));
+        document.addEventListener(
+          'things-image-selector-toggle',
+          function (event) {
+            this.openImageSelectorDialog(event.detail.dataObj, event.detail.callback);
+          }.bind(this)
+        );
 
-        document.addEventListener('things-file-selector-toggle', function(event) {
-          this.openFileSelectorDialog(event.detail.dataObj, event.detail.callback);
-        }.bind(this));
+        document.addEventListener(
+          'things-file-selector-toggle',
+          function (event) {
+            this.openFileSelectorDialog(event.detail.dataObj, event.detail.callback);
+          }.bind(this)
+        );
 
-        document.addEventListener('things-import-dialog-toggle', function(event) {
-          var request = event.detail;
-          this.openImportDialog(request.config, request.model, request.columns, request.menuInfo, request.closeCallback);
-        }.bind(this));
+        document.addEventListener(
+          'things-import-dialog-toggle',
+          function (event) {
+            var request = event.detail;
+            this.openImportDialog(
+              request.config,
+              request.model,
+              request.columns,
+              request.menuInfo,
+              request.closeCallback
+            );
+          }.bind(this)
+        );
 
-        document.addEventListener('things-image-dialog-toggle', function(event) {
-          var request = event.detail;
-          var title = request.title;
-          var attachmentId = request.attachmentId;
-          var imageUrl = request.imageUrl;
-          var dialogSize = request.dialogSize;
-          var openCallback = request.openCallback;
-          var closeCallback = request.closeCallback;
+        document.addEventListener(
+          'things-image-dialog-toggle',
+          function (event) {
+            var request = event.detail;
+            var title = request.title;
+            var attachmentId = request.attachmentId;
+            var imageUrl = request.imageUrl;
+            var dialogSize = request.dialogSize;
+            var openCallback = request.openCallback;
+            var closeCallback = request.closeCallback;
 
-          this.openImageDialog(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback)
-        }.bind(this));
+            this.openImageDialog(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback);
+          }.bind(this)
+        );
 
-        document.addEventListener('things-dialog-close', function() {
-          this.closeDialog();
-        }.bind(this));
+        document.addEventListener(
+          'things-dialog-close',
+          function () {
+            this.closeDialog();
+          }.bind(this)
+        );
 
-        document.addEventListener('things-all-dialog-close', function() {
-          this.closeAllDialog();
-        }.bind(this));
+        document.addEventListener(
+          'things-all-dialog-close',
+          function () {
+            this.closeAllDialog();
+          }.bind(this)
+        );
 
-        document.addEventListener('things-date-picker-close', function() {
-          this.closeDateDialog();
-        }.bind(this));
+        document.addEventListener(
+          'things-date-picker-close',
+          function () {
+            this.closeDateDialog();
+          }.bind(this)
+        );
 
-        document.addEventListener('things-image-selector-close', function() {
-          this.closeImageSelectorDialog();
-        }.bind(this));
+        document.addEventListener(
+          'things-image-selector-close',
+          function () {
+            this.closeImageSelectorDialog();
+          }.bind(this)
+        );
 
-        document.addEventListener('things-file-selector-close', function() {
-          this.closeFileSelectorDialog();
-        }.bind(this));
+        document.addEventListener(
+          'things-file-selector-close',
+          function () {
+            this.closeFileSelectorDialog();
+          }.bind(this)
+        );
 
-        document.addEventListener('things-import-dialog-close', function() {
-          this.closeImportDialog();
-        }.bind(this));
+        document.addEventListener(
+          'things-import-dialog-close',
+          function () {
+            this.closeImportDialog();
+          }.bind(this)
+        );
 
-        document.addEventListener('things-image-dialog-close', function() {
-          this.closeImageDialog();
-        }.bind(this));
+        document.addEventListener(
+          'things-image-dialog-close',
+          function () {
+            this.closeImageDialog();
+          }.bind(this)
+        );
       },
 
       /**
@@ -184,9 +289,9 @@ Copyright © HatioLab Inc. All rights reserved.
        ****
        * @param {Object} event
        */
-      initOpener: function(event) {
-        this.menuInfo = null;      
-        this.menuInfo = event.detail.menuInfo; 
+      initOpener: function (event) {
+        this.menuInfo = null;
+        this.menuInfo = event.detail.menuInfo;
         this.resource = event.detail.resource;
         this.openCallback = event.detail.openCallback;
         this.closeCallback = event.detail.closeCallback;
@@ -194,7 +299,7 @@ Copyright © HatioLab Inc. All rights reserved.
       },
 
       /**
-       * 
+       *
        * dialog open logic
        ****
        * @param  {Object} view          화면에 보여줄 element
@@ -203,41 +308,41 @@ Copyright © HatioLab Inc. All rights reserved.
        * @param  {[type]} closeCallback close시 수행 callback
        * @return {null}
        */
-      openDialog: function(view, modal, openCallback, closeCallback) {
+      openDialog: function (view, modal, openCallback, closeCallback) {
         var elements = this._nodes;
 
-        var dialogs = elements.filter(function(element) {
-          return (element.id.indexOf('common-dialog') >= 0 && element.active == false);
-        })
+        var dialogs = elements.filter(function (element) {
+          return element.id.indexOf('common-dialog') >= 0 && element.active == false;
+        });
 
-        if(dialogs.length > 0) {
+        if (dialogs.length > 0) {
           var dialogSize = 'size' + dialogs.length;
           var element = dialogs[0];
 
-          if(element) {
+          if (element) {
             var dialog = element.getDialog();
-                      
+
             element.title = view.title;
             element.dialogSize = dialogSize;
             dialog.modal = modal;
             var scrollable = element.$.scrollroot;
 
-            if(element.detailView) {
+            if (element.detailView) {
               try {
                 scrollable.removeChild(element.detailView);
-              } catch(e) {
+              } catch (e) {
                 console.log(e);
               }
-            } 
+            }
 
-            if(element.openCallback) {
+            if (element.openCallback) {
               element.openCallback = null;
             }
 
-            if(element.closeCallback) {
+            if (element.closeCallback) {
               element.closeCallback = null;
             }
-            
+
             element.detailView = view;
             element.openCallback = openCallback;
             element.closeCallback = closeCallback;
@@ -251,10 +356,10 @@ Copyright © HatioLab Inc. All rights reserved.
       /**
        * active common-dialog중 가장 최근에 사용한 dialog를 닫는다.
        */
-      closeDialog: function() {
+      closeDialog: function () {
         var elements = this._nodes;
-        var dialogs = elements.filter(function(element) {
-          return (element.id.indexOf('common-dialog') >= 0 && element.active == true);
+        var dialogs = elements.filter(function (element) {
+          return element.id.indexOf('common-dialog') >= 0 && element.active == true;
         });
 
         var lastDialog = dialogs.pop(-1);
@@ -264,11 +369,11 @@ Copyright © HatioLab Inc. All rights reserved.
       /**
        * 모든 다이얼로그를 close
        */
-      closeAllDialog: function() {
+      closeAllDialog: function () {
         var elements = this._nodes;
 
-        elements.forEach(function(element) {
-          if(element.active) {
+        elements.forEach(function (element) {
+          if (element.active) {
             var dialog = element.getDialog();
             dialog.close();
           }
@@ -276,7 +381,7 @@ Copyright © HatioLab Inc. All rights reserved.
       },
 
       /**
-       * 
+       *
        * custom dialog open logic
        ****
        * @param  {Object} view          화면에 보여줄 element
@@ -285,39 +390,39 @@ Copyright © HatioLab Inc. All rights reserved.
        * @param  {[type]} closeCallback close시 수행 callback
        * @return {null}
        */
-      openCustomSizeDialog: function(view, modal, dialogSize, openCallback, closeCallback) {
+      openCustomSizeDialog: function (view, modal, dialogSize, openCallback, closeCallback) {
         var elements = this._nodes;
 
-        var dialogs = elements.filter(function(element) {
-          return (element.id.indexOf('common-dialog') >= 0 && element.active == false);
-        })
+        var dialogs = elements.filter(function (element) {
+          return element.id.indexOf('common-dialog') >= 0 && element.active == false;
+        });
 
         var element = dialogs[0];
 
-        if(element) {
+        if (element) {
           var dialog = element.getDialog();
-                    
+
           element.title = view.title;
           element.dialogSize = dialogSize;
           dialog.modal = modal;
           var scrollable = element.$.scrollroot;
 
-          if(element.detailView) {
+          if (element.detailView) {
             try {
               scrollable.removeChild(element.detailView);
-            } catch(e) {
+            } catch (e) {
               console.log(e);
             }
-          } 
+          }
 
-          if(element.openCallback) {
+          if (element.openCallback) {
             element.openCallback = null;
           }
 
-          if(element.closeCallback) {
+          if (element.closeCallback) {
             element.closeCallback = null;
           }
-          
+
           element.detailView = view;
           element.openCallback = openCallback;
           element.closeCallback = closeCallback;
@@ -333,16 +438,16 @@ Copyright © HatioLab Inc. All rights reserved.
        * ****
        * @param  {object}   dataObj  다이어로그 사용 object
        * @param  {Function} callback open시 적용 callback
-       * @return {null}            
+       * @return {null}
        */
-      openDateDialog: function(dataObj, callback) {
+      openDateDialog: function (dataObj, callback) {
         this.$['date-picker-dialog'].open(dataObj, callback);
       },
 
       /**
        * date picker dialog close
        */
-      closeDateDialog: function() {
+      closeDateDialog: function () {
         this.$['date-picker-dialog'].close();
       },
 
@@ -352,9 +457,9 @@ Copyright © HatioLab Inc. All rights reserved.
        * ****
        * @param  {object}   dataObj  다이어로그 사용 object
        * @param  {Function} callback open시 적용 callback
-       * @return {null}            
+       * @return {null}
        */
-      openImageSelectorDialog: function(dataObj, callback) {
+      openImageSelectorDialog: function (dataObj, callback) {
         this.$['image-selector-dialog'].open(dataObj, callback);
       },
       /**
@@ -363,16 +468,16 @@ Copyright © HatioLab Inc. All rights reserved.
        * ****
        * @param  {object}   dataObj  다이어로그 사용 object
        * @param  {Function} callback open시 적용 callback
-       * @return {null}            
+       * @return {null}
        */
-      openFileSelectorDialog: function(dataObj, callback) {
+      openFileSelectorDialog: function (dataObj, callback) {
         this.$['file-selector-dialog'].open(dataObj, callback);
       },
 
       /**
        * image selector dialog close
        */
-      closeImageSelectorDialog: function() {
+      closeImageSelectorDialog: function () {
         this.$['image-selector-dialog'].close();
       },
 
@@ -384,16 +489,16 @@ Copyright © HatioLab Inc. All rights reserved.
        * @param  {Array} columns       grid columns
        * @param  {Object} menuInfo      menu information
        * @param  {function} closeCallback callback
-       * @return {null}              
+       * @return {null}
        */
-      openImportDialog: function(config, model, columns, menuInfo, closeCallback) {
+      openImportDialog: function (config, model, columns, menuInfo, closeCallback) {
         this.$['import-dialog'].open(config, model, columns, menuInfo, closeCallback);
       },
 
       /**
        * import dialog close
        */
-      closeImportDialog: function() {
+      closeImportDialog: function () {
         this.$['import-dialog'].close();
       },
 
@@ -406,18 +511,18 @@ Copyright © HatioLab Inc. All rights reserved.
        * @param  {Number} dialogSize    dialog size
        * @param  {Function} openCallback  open시 호출 callback
        * @param  {Function} closeCallback close시 호출 callback
-       * @return {null}               
+       * @return {null}
        */
-      openImageDialog: function(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback) {
+      openImageDialog: function (title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback) {
         this.$['image-dialog'].open(title, attachmentId, imageUrl, dialogSize, openCallback, closeCallback);
       },
 
       /**
        * image dialog close
        */
-      closeImageDialog: function() {
+      closeImageDialog: function () {
         this.$['image-dialog'].close();
-      }
-    })
+      },
+    });
   </script>
 </dom-module>
